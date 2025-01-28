@@ -208,11 +208,11 @@ const Calendar = ({
       } else if (availableDates) {
         opacity = availableDates.includes(item.dateString) ? 1 : 0.25;
       }
-      let color = "#0D275E";
+      let color = "#E7E9EB";
       if (item.isSelected) {
-        color = "white";
+        color = "black";
       } else if (item.isHoliday) {
-        color = "#9E1111";
+        color = "#ff0000";
       }
       const disabled = item.disabled || !item.isCurrentMonth;
       return (
@@ -235,9 +235,7 @@ const Calendar = ({
     for (let i = 1; i <= 7; i += 1) {
       arr.push(
         <Cell key={`weekday-${i}`} isSelected={false}>
-          <Typography color={"#0D275E"} fontSize={16}>
-            {renderDayOfWeek(i)}
-          </Typography>
+          <Typography fontSize={16}>{renderDayOfWeek(i)}</Typography>
         </Cell>,
       );
     }
@@ -247,10 +245,7 @@ const Calendar = ({
   const subDate = useCallback(() => {
     setCurDate((state) => {
       const newState = sub(state as Date, { months: 1 });
-      const endMonth = endOfMonth(newState);
-      if (isAfter(minDate as Date, endMonth)) {
-        return state;
-      }
+      const endMonth = endOfMonth;
       return newState;
     });
   }, [minDate]);
@@ -272,8 +267,8 @@ const Calendar = ({
         <ArrowButton onClick={subDate}>
           <ShortArrow />
         </ArrowButton>
-        <Typography fontSize={16} color={"#0C2A6A"}>
-          {format(curDate, "LLLL yyyy", { locale: ru })}
+        <Typography fontSize={16} color={"#ADD1FC"}>
+          {format(curDate, "LLLL yyyy", { locale: ru })} г.
         </Typography>
         <ArrowButton onClick={addDate}>
           <ShortArrow rotate={180} />
@@ -312,6 +307,10 @@ const ArrowButton = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+
+  path {
+    stroke: #add1fc;
+  }
 `;
 
 const Cell = styled.div<
@@ -333,7 +332,7 @@ const Cell = styled.div<
   ${({ isSelected }) => {
     if (isSelected) {
       return {
-        background: "#113D9E",
+        background: "#ADD1FC",
       };
     }
   }}

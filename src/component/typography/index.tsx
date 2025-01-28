@@ -11,7 +11,7 @@ interface Props {
 
 const Typography = ({
   children,
-  color = "#0C2A6A",
+  color = "#ffffff",
   fontSize = 16,
   opacity = 1,
   textAlign,

@@ -8,7 +8,7 @@ const ContentLayout = ({ children }: PropsWithChildren) => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  background: #ebf2f8;
+  background: #252525;
   padding: 15px;
   width: 100%;
   height: calc(100% - 130px);

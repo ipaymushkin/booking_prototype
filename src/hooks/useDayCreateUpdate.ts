@@ -11,7 +11,7 @@ export const useDayCreateUpdate = () => {
       data,
     }: {
       id: number | undefined;
-      data: Pick<DayInterface, "slots" | "date">;
+      data: Pick<DayInterface, "places" | "date">;
     }) =>
       fetchInstance({
         method: !id ? "POST" : "PUT",

@@ -25,7 +25,7 @@ const Header = ({ title, onBack }: Props) => {
 const Wrapper = styled.div`
   width: 100%;
   height: 44px;
-  background: #113d9e;
+  background: #252525;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,13 +37,17 @@ const ArrowWrapper = styled.div`
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: white;
   position: absolute;
   left: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  border: 1px solid #add1fc;
+
+  path {
+    stroke: #add1fc;
+  }
 `;
 
 export default Header;

@@ -28,15 +28,20 @@ const AdminPage = () => {
     dates: data as DayInterface[],
   });
 
-  const recordsCount = dataDetails?.slots?.filter(
-    (el) => el.available === false,
-  )?.length;
+  let recordsCount = 0;
+  if (dataDetails?.places) {
+    Object.values(dataDetails?.places).forEach((slots) => {
+      if (slots.some((slot) => !slot.available)) {
+        recordsCount += 1;
+      }
+    });
+  }
 
   return (
     <>
-      <Header title={"График записей"} />
+      <Header title={"График бронирования"} />
       <ContentLayout>
-        <Card>
+        <Card dark>
           <Calendar
             setCurrentDate={setCurrentDate}
             availableDates={availableDates}
@@ -46,15 +51,11 @@ const AdminPage = () => {
           <Card>
             <RecordsWrapper>
               <RecordsInfo>
-                <Typography color={"#0D275E"} fontSize={16} fontWeight={600}>
-                  {recordsCount}{" "}
-                  {getPluralLabel(recordsCount, [
-                    "запись",
-                    "записи",
-                    "записей",
-                  ])}
+                <Typography fontSize={16} fontWeight={600}>
+                  Занято {recordsCount}{" "}
+                  {getPluralLabel(recordsCount, ["место", "места", "мест"])}
                 </Typography>
-                <Typography color={"rgba(12, 42, 106, 0.5)"} fontSize={14}>
+                <Typography fontSize={14}>
                   Сегодня, {format(new Date(), "dd.MM.yyyy")} г.
                 </Typography>
               </RecordsInfo>
@@ -67,7 +68,7 @@ const AdminPage = () => {
           </Card>
         )}
       </ContentLayout>
-      <Card borderRadius={"35px 35px 0 0"}>
+      <Card borderRadius={"35px 35px 0 0"} dark>
         <Button
           title={"Редактировать"}
           onClick={() => navigate(routes.adminEdit.path)}

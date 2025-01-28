@@ -37,7 +37,7 @@ const Wrapper = styled.div`
 
     text-align: center;
     font-size: 16px;
-    color: #0c2a6a;
+    color: #353535;
     text-align-last: center;
   }
 

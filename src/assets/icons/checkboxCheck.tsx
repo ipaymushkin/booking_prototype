@@ -9,7 +9,7 @@ const CheckboxCheck = () => {
     >
       <path
         d="M10.6 1.40039L3.44048 8.60039L2.22024 7.37325L1 6.14611"
-        stroke="white"
+        stroke="black"
         strokeWidth="2"
         strokeLinecap="round"
       />
