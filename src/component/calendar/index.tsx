@@ -210,7 +210,7 @@ const Calendar = ({
       }
       let color = "#E7E9EB";
       if (item.isSelected) {
-        color = "black";
+        color = "#252525";
       } else if (item.isHoliday) {
         color = "#ff0000";
       }

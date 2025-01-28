@@ -9,7 +9,12 @@ export const getAvailableDates = ({
 }) => {
   const arr = [] as string[];
   dates?.forEach((day: DayInterface) => {
-    if (!checkAvailableSlots || day.slots.some((slot) => slot.available)) {
+    if (
+      !checkAvailableSlots ||
+      Object.values(day.places)?.some((place) =>
+        place.some((slot) => slot.available),
+      )
+    ) {
       arr.push(day.date);
     }
   });

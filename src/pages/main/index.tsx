@@ -14,6 +14,7 @@ import Button from "../../component/button";
 import styled from "styled-components";
 import { useDayCreateUpdate } from "../../hooks/useDayCreateUpdate.ts";
 import { routes } from "../../config/routes.ts";
+import { generateClassroomPlacename } from "../../utils/generateClassroomPlacename.ts";
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -56,18 +57,19 @@ const MainPage = () => {
     }
   };
 
-  const availableSlots = selectedMeta?.slots?.filter((el) => el.available);
+  const slots = selectedMeta?.places?.[generateClassroomPlacename(0)];
+  console.log(slots);
 
   return (
     <>
-      <Header title={"Запись"} />
+      <Header title={"Бронирование"} />
       <ContentLayout>
         <Card>
-          <Typography color={"#0D275E"} fontSize={16} textAlign={"center"}>
+          <Typography fontSize={16} textAlign={"center"}>
             Выберите подходящую дату
           </Typography>
         </Card>
-        <Card>
+        <Card dark>
           <Calendar
             selectedDate={selectedDate}
             onSelect={(e) => {
@@ -84,39 +86,33 @@ const MainPage = () => {
             availableDates={availableDates}
           />
         </Card>
-        {selectedDate && availableSlots && (
+        {slots && (
           <>
             <Card>
-              <Typography color={"#0D275E"} fontSize={16} textAlign={"center"}>
+              <Typography fontSize={16} textAlign={"center"}>
                 Выберите подходящее время на выбранную дату
               </Typography>
             </Card>
-            <Card>
-              {availableSlots.length === 0 ? (
-                <Typography textAlign={"center"} fontSize={16}>
-                  Нет доступных талонов
-                </Typography>
-              ) : (
-                <Grid>
-                  {availableSlots.map((slot) => {
-                    const selected = slot.time === selectedTime;
-                    return (
-                      <TimeElement
-                        key={`time-${slot.time}`}
-                        onClick={() => setSelectedTime(slot.time)}
-                        selected={selected}
+            <Card dark>
+              <Grid>
+                {slots.map((slot) => {
+                  const selected = slot.time === selectedTime;
+                  return (
+                    <TimeElement
+                      key={`time-${slot.time}`}
+                      onClick={() => setSelectedTime(slot.time)}
+                      selected={selected}
+                    >
+                      <Typography
+                        color={selected ? "#252525" : "#E7E9EB"}
+                        fontSize={16}
                       >
-                        <Typography
-                          color={selected ? "white" : "#0D275E"}
-                          fontSize={16}
-                        >
-                          {slot.time}
-                        </Typography>
-                      </TimeElement>
-                    );
-                  })}
-                </Grid>
-              )}
+                        {slot.time}
+                      </Typography>
+                    </TimeElement>
+                  );
+                })}
+              </Grid>
             </Card>
           </>
         )}

@@ -99,7 +99,7 @@ const AdminEditPage = () => {
   return (
     <>
       <Header
-        title={"Бронирование"}
+        title={"Расписание работы"}
         onBack={() => navigate(routes.admin.path)}
       />
       <ContentLayout>
